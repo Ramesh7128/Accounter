@@ -10,4 +10,6 @@ urlpatterns = [
    	url(r'^register/$', register_page, name='register_page'),
    	url(r'^clients/$', Clients.as_view(), name='client'),
    	url(r'^addclient/$', AddClient.as_view(), name='addClient'),
+   	url(r'^clients/(?P<num>[0-9]+)/projects/$', AddClient.as_view(), name='addClient'),
+
 ]

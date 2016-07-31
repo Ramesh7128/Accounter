@@ -7,7 +7,7 @@
     {% for client in clientlist %}
     <p>
     {{client.clientName}}
-    {{client.clientEmail}}
+    <a href="/clients/{{client.id}}/projects">{{client.clientEmail}}
     {{client.clientCompany}}</p>
     {% endfor %}
     {% endif %}
