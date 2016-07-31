@@ -1,10 +1,13 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from accountingapp.views import *
+from django.contrib.auth.views import login
  
-urlpatterns = patterns('',
+urlpatterns = [
 	url(r'^$', home, name='home'),
     # url(r'^/', home, name="home")
-    url(r'^login/$', 'django.contrib.auth.views.login'),
-    url(r'^logout/$', logout_page),
-   	url(r'^register/$', register_page),
-)
+    url(r'^login/$', login),
+    url(r'^logout/$', logout_page, name='logout_page'),
+   	url(r'^register/$', register_page, name='register_page'),
+   	url(r'^clients/$', Clients.as_view(), name='client'),
+   	url(r'^addclient/$', AddClient.as_view(), name='addClient'),
+]

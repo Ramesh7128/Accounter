@@ -1,6 +1,7 @@
 from django import forms 
 import re
 from django.contrib.auth.models import User
+from accountingapp.models import *
 from django.core.exceptions import ObjectDoesNotExist
 
 class RegistrationForm(forms.Form):
@@ -28,3 +29,18 @@ class RegistrationForm(forms.Form):
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError('Username is already taken.')
+
+
+class AddClientForm(forms.Form):
+    clientName = forms.CharField(label='Client Name', max_length=200)
+    clientEmail = forms.EmailField(label='Client Email', max_length=100)
+    clientCompany = forms.CharField(label='Client Company', max_length=200)
+
+
+    def clean_clientEmail(self):
+        client_email = self.cleaned_data['clientEmail']
+        try:
+            Client.objects.get(clientEmail = client_email)
+        except ObjectDoesNotExist:
+            return client_email
+        raise forms.ValidationError('Client with email already exists') 

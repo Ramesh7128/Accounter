@@ -1,0 +1,14 @@
+{% extends "accountingapp/base.html" %}
+{% block title %}Clients{% endblock %}
+{% block head %}List of clients{% endblock %}
+{% block content %}
+    <p><a href="/addclient">Add Client</a></p>
+    {% if clientlist %}
+    {% for client in clientlist %}
+    <p>
+    {{client.clientName}}
+    {{client.clientEmail}}
+    {{client.clientCompany}}</p>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

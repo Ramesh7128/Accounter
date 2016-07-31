@@ -1,0 +1,10 @@
+{% extends "accountingapp/base.html" %}
+{% block title %}Add Client{% endblock %}
+{% block head %}Add Client{% endblock %}
+{% block content %}
+<form method="post" action=".">
+{{ form.as_p }}
+<input type="submit" value="Add Client" />
+{% csrf_token %}
+</form>
+{% endblock %}
