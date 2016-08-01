@@ -1,0 +1,14 @@
+{% extends "accountingapp/base.html" %}
+{% block title %}Projects{% endblock %}
+{% block head %}List of Project{% endblock %}
+{% block content %}
+    <p><a href="/addproject/{{client_id}}">Add Project</a></p>
+    {% if projectlist %}
+    {% for project in projectlist %}
+    <p>
+    {{project.projectName}}
+    <a href="/projects/addtime/{{project.id}}">{{project.projectStartDate}}
+    {{project.projectCostPerHr}}</p>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -24,7 +24,7 @@ class Project(models.Model):
 
 
 	projectName = models.CharField(max_length=200, blank=False, null=False)
-	projectStartData = models.DateField(blank=False, null=False)
+	projectStartDate = models.DateField(blank=False, null=False)
 	projectCostPerHr =  models.FloatField(default=0.0)
 	projectClient = models.ForeignKey(Client, null=True, blank=True)
 

@@ -68,3 +68,44 @@ class AddClient(View):
 			return HttpResponseRedirect('/clients')
 		else:
 			return Http404
+
+
+class Projects(View):
+
+	# pk = 0
+
+	def get(self, request, **kwargs):
+		client = Client.objects.get(id=self.kwargs['pk'])
+		projectlist = Project.objects.filter(projectClient=client)
+		context = {}
+		context['projectlist'] = projectlist
+		context['client_id'] = self.kwargs['pk']
+		return render(request, 'accountingapp/projects.html', context)
+
+
+
+class AddProject(View):
+
+	def get(self, request, **kwargs):
+
+		form = AddProjectForm(initial={'projectClient': self.kwargs['pk']})
+		form.fields['projectClient'].widget = forms.HiddenInput()
+		context = {}
+		context['form'] = form
+		return render(request, 'accountingapp/addproject.html', context)
+
+
+	def post(self, request, **kwargs):
+		form  = AddProjectForm(request.POST)
+		if form.is_valid():
+			project = Project()
+			project.projectName = form.cleaned_data['projectName']
+			project.projectStartDate = form.cleaned_data['projectStartDate']
+			project.projectCostPerHr =  form.cleaned_data['projectCostPerHr']
+			clientId = form.cleaned_data['projectClient']
+			client = Client.objects.get(id=clientId)
+			project.projectClient = client
+			project.save()
+			return HttpResponseRedirect('/clients/'+str(clientId)+'/projects/')
+
+

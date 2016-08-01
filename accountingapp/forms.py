@@ -3,6 +3,7 @@ import re
 from django.contrib.auth.models import User
 from accountingapp.models import *
 from django.core.exceptions import ObjectDoesNotExist
+from django.forms import extras
 
 class RegistrationForm(forms.Form):
     username = forms.CharField(label='Username', max_length=30)
@@ -43,4 +44,16 @@ class AddClientForm(forms.Form):
             Client.objects.get(clientEmail = client_email)
         except ObjectDoesNotExist:
             return client_email
-        raise forms.ValidationError('Client with email already exists') 
+        raise forms.ValidationError('Client with email already exists')
+
+
+class AddProjectForm(forms.Form):
+    projectName = forms.CharField(label='Project Name', max_length=200)
+    projectStartDate = forms.DateField(widget=extras.SelectDateWidget(empty_label="Nothing"), label='Project Start Date')
+    projectCostPerHr = forms.FloatField(label='Project Cost/Hr')
+    projectClient = forms.IntegerField(label='clientid')
+
+
+    
+
+ 
