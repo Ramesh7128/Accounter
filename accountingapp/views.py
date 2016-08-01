@@ -47,6 +47,14 @@ class Clients(View):
 		context['clientlist'] = client
 		return render(request, 'accountingapp/clients.html', context)
 
+	def post(self, request):
+		if request.POST['action'] == 'delete':
+			clientId = self.request.POST['clientid']
+			client = Client.objects.get(id=clientId)
+			client.delete()
+			return HttpResponseRedirect('/clients')
+		
+
 
 class AddClient(View):
 
@@ -67,7 +75,8 @@ class AddClient(View):
 			client.save()
 			return HttpResponseRedirect('/clients')
 		else:
-			return Http404
+			raise Http404
+
 
 
 class Projects(View):
@@ -81,6 +90,14 @@ class Projects(View):
 		context['projectlist'] = projectlist
 		context['client_id'] = self.kwargs['pk']
 		return render(request, 'accountingapp/projects.html', context)
+
+	def post(self, request, **kwargs):
+		if request.POST['action'] == 'delete':
+			projectId = self.request.POST['projectid']
+			clientid = self.request.POST['clientid']
+			project = Project.objects.get(id=projectId)
+			project.delete()
+			return HttpResponseRedirect('/clients/'+str(clientid)+'/projects/')
 
 
 

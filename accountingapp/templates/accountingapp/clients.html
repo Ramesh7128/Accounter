@@ -7,6 +7,13 @@
     {% for client in clientlist %}
     <p>
     {{client.clientName}}
+    <form method="post" action=".">
+    <input type="hidden" name="clientid" value="{{client.id}}" />
+	<input type="submit" name="action" value="delete"/>
+	{% csrf_token %}
+	</form>
+	{% csrf_token %}
+	</form>
     <a href="/clients/{{client.id}}/projects">{{client.clientEmail}}
     {{client.clientCompany}}</p>
     {% endfor %}

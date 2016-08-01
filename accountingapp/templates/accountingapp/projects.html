@@ -8,7 +8,15 @@
     <p>
     {{project.projectName}}
     <a href="/project/timelist/{{project.id}}">{{project.projectStartDate}}
-    {{project.projectCostPerHr}}</p>
+    {{project.projectCostPerHr}}
+    <form method="post" action=".">
+    <input type="hidden" name="projectid" value="{{project.id}}" />
+	<input type="hidden" name="clientid" value="{{client_id}}" />
+	<input type="submit" name="action" value="delete"/>
+
+	{% csrf_token %}
+	</form>
+    </p>
     {% endfor %}
     {% endif %}
 {% endblock %}
