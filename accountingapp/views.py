@@ -109,3 +109,10 @@ class AddProject(View):
 			return HttpResponseRedirect('/clients/'+str(clientId)+'/projects/')
 
 
+
+class ProjectTimeEntry(View):
+
+	def get()
+
+
+

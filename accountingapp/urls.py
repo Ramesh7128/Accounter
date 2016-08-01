@@ -12,6 +12,6 @@ urlpatterns = [
    	url(r'^addclient/$', AddClient.as_view(), name='addClient'),
    	url(r'^clients/(?P<pk>\d+)/projects/$', Projects.as_view(), name='projects'),
    	url(r'^addproject/(?P<pk>\d+)/$', AddProject.as_view(), name='addProject'),
-   	url(r'^projects/addtime/(?P<pk>\d+)/$', AddProjectTime.as_view(), name='addProjectTime')
+   	url(r'^projects/addtime/(?P<pk>\d+)/$', ProjectTimeEntry.as_view(), name='addProjectTime')
 
 ]

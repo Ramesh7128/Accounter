@@ -33,3 +33,21 @@ class Project(models.Model):
 			return self.projectName
 		else:
 			return "No Name"
+
+
+class ProjectTimeEntry(models.Model):
+
+	workDescription = models.CharField()
+	hoursOfWork = models.FloatField(default=0.0)
+	dateOfWork = models.DateField(blank=False, null=False)
+	project = models.ForeignKey(Project)
+
+
+	def __unicode__(self):
+		if self.project.projectName and self.dateOfWork:
+			return self.project.projectName + "-" + self.dateOfWork
+		else:
+			return "No name"
+
+
+
