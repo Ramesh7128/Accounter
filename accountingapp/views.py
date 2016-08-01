@@ -143,6 +143,15 @@ class ProjectTimeList(View):
 		return render(request, 'accountingapp/project_work_hours.html', context)
 
 
+	def post(self, request, **kwargs):
+		if request.POST['action'] == 'delete':
+			proj_id = self.kwargs['pk']
+			timeid = self.request.POST['timeid']
+			time_entry = ProjectTimeEntry.objects.get(id=timeid)
+			time_entry.delete()
+			return HttpResponseRedirect('/project/timelist/'+ str(proj_id) + '/')
+
+
 
 class AddProjectTime(View):
 

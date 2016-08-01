@@ -9,6 +9,12 @@
     {{timeEntry.workDescription}}
     | {{timeEntry.hoursOfWork}} | {{timeEntry.dateOfWork}} |  
     </p>
+    <form method="post" action=".">
+    <input type="hidden" name="timeid" value="{{timeEntry.id}}" />
+	<input type="submit" name="action" value="delete"/>
+	{% csrf_token %}
+	</form>
+
     {% endfor %}
     {% endif %}
 {% endblock %}
