@@ -37,7 +37,7 @@ class Project(models.Model):
 
 class ProjectTimeEntry(models.Model):
 
-	workDescription = models.CharField()
+	workDescription = models.CharField(max_length=200)
 	hoursOfWork = models.FloatField(default=0.0)
 	dateOfWork = models.DateField(blank=False, null=False)
 	project = models.ForeignKey(Project)

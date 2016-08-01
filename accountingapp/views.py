@@ -110,9 +110,50 @@ class AddProject(View):
 
 
 
-class ProjectTimeEntry(View):
+class ProjectTimeList(View):
 
-	def get()
+	def get(self, request, **kwargs):
+		proj_id = self.kwargs['pk']
+		print proj_id, "kdhnkjsnfkj"
+		project = Project.objects.get(id=proj_id)
+		try:
+			timeEntries = ProjectTimeEntry.objects.filter(project=project)
+		except ProjectTimeEntry.DoesNotExist:
+			timeEntries = None
+		context = {}
+		context['timeEntries'] =  timeEntries
+		context['projId'] = proj_id
+		return render(request, 'accountingapp/project_work_hours.html', context)
+
+
+
+class AddProjectTime(View):
+
+	def get(self, request, **kwargs):
+
+		form = AddProjectTimeForm(initial={'projectId': self.kwargs['pk']})
+		form.fields['projectId'].widget = forms.HiddenInput()
+		context = {}
+		context['form'] = form
+		return render(request, 'accountingapp/add_project_time.html', context)
+
+
+	def post(self, request, **kwargs):
+		form  = AddProjectTimeForm(request.POST)
+		if form.is_valid():
+			projectTime = ProjectTimeEntry()
+			projectTime.workDescription = form.cleaned_data['workDescription']
+			projectTime.hoursOfWork = form.cleaned_data['hoursOfWork']
+			projectTime.dateOfWork =  form.cleaned_data['dateOfWork']
+			projectId = form.cleaned_data['projectId']
+			project = Project.objects.get(id=projectId)
+			projectTime.project = project
+			projectTime.save()
+			return HttpResponseRedirect('/project/timelist/'+ str(projectId) + '/')
+
+
+
+
 
 
 

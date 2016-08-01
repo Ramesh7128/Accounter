@@ -54,9 +54,16 @@ class AddProjectForm(forms.Form):
     projectClient = forms.IntegerField(label='clientid')
 
 
+class AddProjectTimeForm(forms.Form):
+
+    workDescription = forms.CharField(label='Task', max_length=200)
+    hoursOfWork = forms.FloatField(label='Time spent in Hrs')
+    dateOfWork = forms.DateField(widget=extras.SelectDateWidget(empty_label="Nothing"), label='Task Date')
+    projectId = forms.IntegerField(label='projectId')
+    # project = .ForeignKey(Project)
     
 # class ProjectTimeEntryForm(forms.Form):
 
-    
+
 
  

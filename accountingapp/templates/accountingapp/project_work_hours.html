@@ -1,0 +1,14 @@
+{% extends "accountingapp/base.html" %}
+{% block title %}Project Work hours{% endblock %}
+{% block head %}Project work hours{% endblock %}
+{% block content %}
+    <p><a href="/addtime/{{projId}}">Add TIme for Tasks</a></p>
+    <p>
+    {% if timeEntries %}
+    {% for timeEntry in timeEntries %}
+    {{timeEntry.workDescription}}
+    | {{timeEntry.hoursOfWork}} | {{timeEntry.dateOfWork}} |  
+    </p>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
