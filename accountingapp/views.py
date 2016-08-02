@@ -81,8 +81,7 @@ class AddClient(View):
 
 class Projects(View):
 
-	# pk = 0
-
+	
 	def get(self, request, **kwargs):
 		client = Client.objects.get(id=self.kwargs['pk'])
 		projectlist = Project.objects.filter(projectClient=client)
@@ -122,6 +121,7 @@ class AddProject(View):
 			clientId = form.cleaned_data['projectClient']
 			client = Client.objects.get(id=clientId)
 			project.projectClient = client
+			project.user = request.user
 			project.save()
 			return HttpResponseRedirect('/clients/'+str(clientId)+'/projects/')
 

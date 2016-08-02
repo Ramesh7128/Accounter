@@ -27,6 +27,7 @@ class Project(models.Model):
 	projectStartDate = models.DateField(blank=False, null=False)
 	projectCostPerHr =  models.FloatField(default=0.0)
 	projectClient = models.ForeignKey(Client, null=True, blank=True)
+	user = models.ForeignKey(User, null=True, blank=True)
 
 	def __unicode__(self):
 		if self.projectName:

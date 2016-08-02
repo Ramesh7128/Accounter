@@ -1,6 +1,33 @@
 {% extends "accountingapp/base.html" %}
 {% block title %}Welcome to Django{% endblock %}
-{% block head %}Welcome to Django{% endblock %}
+{% block head %}<div class="text-center"><h1>Welcome to Django</h1></div>{% endblock %}
 {% block content %}
-    <p>Welcome {{ user.username }} !!!</p>
+    <div class="container">
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron hero-spacer">
+            <h1>Effective Accounting for freelancers!</h1>
+            
+            
+            <div class="text-center">
+            {% if user.is_authenticated %}
+            <a class="btn btn-primary btn-large" href="/clients">Clients</a>
+            <a class="btn btn-primary btn-large" href="/projects">Projects</a>
+            {% else %}
+            <a class="btn btn-primary btn-large">Login</a>
+            <a class="btn btn-primary btn-large">Register</a>
+            {% endif %}
+            </div>
+            
+        </header>
+
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+        <hr>
+    </div>
 {% endblock %}

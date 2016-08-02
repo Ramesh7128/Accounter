@@ -2,7 +2,7 @@
 {% block title %}Add Project{% endblock %}
 {% block head %}Add Project{% endblock %}
 {% block content %}
-<form method="post" action=".">
+<form method="post" action="/">
 {{ form.as_p }}
 <input type="submit" value="Add Project" />
 {% csrf_token %}
