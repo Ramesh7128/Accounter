@@ -1,9 +1,41 @@
 {% extends "accountingapp/base.html" %}
 {% block title %}Clients{% endblock %}
-{% block head %}List of clients{% endblock %}
+{% block head %}<div class="text-center"><h1>Clients</h1></div>{% endblock %}
 {% block content %}
-    <p><a href="/addclient">Add Client</a></p>
-    {% if clientlist %}
+
+    
+    <!--Content-->
+    <div class="container">
+    <p><a href="/addclient" class="btn btn-primary">Add Client</a></p>
+    <div class="row text-center">
+        {% if clientlist %}
+        {% for client in clientlist %}
+
+            <a href="/clients/{{client.id}}/projects">
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>{{client.clientName}}</h3>
+                        <p>{{client.clientName}}</p>
+                        <p>
+                            <form method="post" action=".">
+                                <input type="hidden" name="clientid" value="{{client.id}}" />
+                                <input type="submit" class="btn btn-primary" name="action" value="delete"/>
+                                {% csrf_token %}
+                            </form>
+                            <!-- <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a> -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </a>
+        {% endfor %}
+        {% endif %}
+    </div>
+    </div>
+
+            
+    <!-- {% if clientlist %}
     {% for client in clientlist %}
     <p>
     {{client.clientName}}
@@ -18,4 +50,5 @@
     {{client.clientCompany}}</p>
     {% endfor %}
     {% endif %}
+     -->
 {% endblock %}

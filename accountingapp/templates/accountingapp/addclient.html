@@ -1,10 +1,69 @@
 {% extends "accountingapp/base.html" %}
 {% block title %}Add Client{% endblock %}
-{% block head %}Add Client{% endblock %}
+{% block head %}<div class="text-center"><h1>Add Client</h1></div>{% endblock %}
 {% block content %}
-<form method="post" action=".">
-{{ form.as_p }}
-<input type="submit" value="Add Client" />
-{% csrf_token %}
-</form>
+<div class="container">    
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Add Client</div>
+                    </div>
+                    <!-- needs to fixed -->
+                    {% if form.errors %}
+					<div class="alert alert-danger">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						Your Username and password did not match.
+					</div>
+					{% endif %}     
+
+                    <div style="padding-top:30px" class="panel-body" >
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                            
+                        <form id="addclientform" method="post" action="." class="form-horizontal" role="form">
+                                    
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="clientName" type="text" class="form-control" name="clientName" value="" placeholder="Client Name">                                        
+                                    </div>
+                                
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="clientEmail" type="email" class="form-control" name="clientEmail" placeholder="Client Email">
+                                    </div>
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="clientCompany" type="text" class="form-control" name="clientCompany" value="" placeholder="Client Company">                                        
+                                    </div>
+
+                            <!-- <input type="hidden" name="next" value="/clients" />
+                             -->        
+
+                                
+                            
+
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 text-center">
+                                      <!-- <a id="btn-login" href="#" class="btn btn-success">Login  </a> -->
+                                      <input type="submit" class="btn btn-success" value="Add Client" />
+                                      
+
+                                    </div>
+                                </div>
+
+
+                            
+                                {% csrf_token %}    
+                            </form>     
+
+
+
+                        </div>                     
+                    </div>  
+        </div>
+        </div>
+
 {% endblock %}

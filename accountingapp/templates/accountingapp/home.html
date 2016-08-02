@@ -12,10 +12,9 @@
             <div class="text-center">
             {% if user.is_authenticated %}
             <a class="btn btn-primary btn-large" href="/clients">Clients</a>
-            <a class="btn btn-primary btn-large" href="/projects">Projects</a>
             {% else %}
-            <a class="btn btn-primary btn-large">Login</a>
-            <a class="btn btn-primary btn-large">Register</a>
+            <a class="btn btn-primary btn-large" href='/login/'>Login</a>
+            <a class="btn btn-primary btn-large" href='/register'>Register</a>
             {% endif %}
             </div>
             
