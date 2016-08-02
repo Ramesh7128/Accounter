@@ -35,7 +35,7 @@ class RegistrationForm(forms.Form):
 class AddClientForm(forms.Form):
     clientName = forms.CharField(label='Client Name', max_length=200)
     clientEmail = forms.EmailField(label='Client Email', max_length=100)
-    clientCompany = forms.CharField(label='Client Company', max_length=200)
+    clientCompanyInfo = forms.CharField(label='Client Company', max_length=700)
 
 
     def clean_clientEmail(self):
@@ -58,25 +58,8 @@ class AddProjectTimeForm(forms.Form):
 
     workDescription = forms.CharField(label='Task', max_length=200)
     hoursOfWork = forms.FloatField(label='Time spent in Hrs')
-    dateOfWork = forms.DateField(widget=extras.SelectDateWidget(empty_label="Nothing"), label='Task Date')
     projectId = forms.IntegerField(label='projectId')
     # project = .ForeignKey(Project)
     
 # class ProjectTimeEntryForm(forms.Form):
 
-class EditClientForm(forms.Form):
-    clientName = forms.CharField(label='Client Name', max_length=200)
-    clientEmail = forms.EmailField(label='Client Email', max_length=100)
-    clientCompany = forms.CharField(label='Client Company', max_length=200)
-
-
-    def clean_clientEmail(self):
-        client_email = self.cleaned_data['clientEmail']
-        try:
-            Client.objects.get(clientEmail = client_email)
-        except ObjectDoesNotExist:
-            return client_email
-        raise forms.ValidationError('Client with email already exists')
-
-
- 

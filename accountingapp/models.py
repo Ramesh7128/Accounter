@@ -10,7 +10,7 @@ class Client(models.Model):
 
 	clientName = models.CharField(max_length=200, blank=False, null=False)
 	clientEmail = models.EmailField(max_length=100, blank=False, null=False)
-	clientCompany = models.CharField(max_length=200, blank=False, null=False)
+	clientCompanyInfo = models.CharField(max_length=700, blank=False, null=False)
 	user = models.ForeignKey(User)
 
 	def __unicode__(self):
@@ -40,13 +40,13 @@ class ProjectTimeEntry(models.Model):
 
 	workDescription = models.CharField(max_length=200)
 	hoursOfWork = models.FloatField(default=0.0)
-	dateOfWork = models.DateField(blank=False, null=False)
+	dateOfWork = models.DateField(auto_now_add=True)
 	project = models.ForeignKey(Project)
 
 
 	def __unicode__(self):
 		if self.project.projectName and self.dateOfWork:
-			return self.project.projectName + "-" + self.dateOfWork
+			return self.project.projectName + "-" + str(self.dateOfWork)
 		else:
 			return "No name"
 

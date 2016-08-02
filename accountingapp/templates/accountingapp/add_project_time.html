@@ -1,10 +1,62 @@
 {% extends "accountingapp/base.html" %}
 {% block title %}Add Time For Projects{% endblock %}
-{% block head %}Add Time entries spent on Project{% endblock %}
+{% block head %}<div class="text-center"><h1>Add Project Time</h1></div>{% endblock %}
 {% block content %}
-<form method="post" action=".">
-{{ form.as_p }}
-<input type="submit" value="Add Client" />
-{% csrf_token %}
-</form>
+
+<div class="container">    
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Add Project Time</div>
+                    </div>
+                    <!-- needs to fixed -->
+                         
+
+                    <div style="padding-top:30px" class="panel-body" >
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                            
+                        <form id="addprojectform" method="post" action="." class="form-horizontal" role="form">
+                                    
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="workDescription" type="text" class="form-control" name="workDescription" value="" placeholder="Task Description">                                        
+                                    </div>
+                                
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="hoursOfWork" type="text" class="form-control" name="hoursOfWork" value="" placeholder="Hrs Spent">                                        
+                                    </div>
+
+
+
+                            <input type="hidden" id="projectId" name="projectId" value="{{projectId}}"/>
+                                    
+
+                                
+                            
+
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 text-center">
+                                      <!-- <a id="btn-login" href="#" class="btn btn-success">Login  </a> -->
+                                      <input type="submit" class="btn btn-success" value="Add Project Time" />
+                                    </div>
+                                </div>
+
+
+                            
+                                {% csrf_token %}    
+                            </form>     
+
+
+
+                        </div>                     
+                    </div>  
+        </div>
+        </div>
+
+
 {% endblock %}

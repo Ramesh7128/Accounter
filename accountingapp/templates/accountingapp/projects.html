@@ -1,24 +1,36 @@
 {% extends "accountingapp/base.html" %}
 {% block title %}Projects{% endblock %}
-{% block head %}List of Project{% endblock %}
+{% block head %}<div class="text-center"><h1>Projects</h1></div>{% endblock %}
 {% block content %}
-    <p><a href="/addproject/{{client_id}}">Add Project</a>
-    <a href="/projectreports/{{client_id}}">Add Project</a>
-    </p>
-    {% if projectlist %}
-    {% for project in projectlist %}
-    <p>
-    {{project.projectName}}
-    <a href="/project/timelist/{{project.id}}">{{project.projectStartDate}}
-    {{project.projectCostPerHr}}
-    <form method="post" action=".">
-    <input type="hidden" name="projectid" value="{{project.id}}" />
-	<input type="hidden" name="clientid" value="{{client_id}}" />
-	<input type="submit" name="action" value="delete"/>
+    
+    <div class="container">
+    <p><a href="/addproject/{{client_id}}" class="btn btn-primary">Add Project</a></p>
+    <div class="row text-center">
+        {% if projectlist %}
+        {% for project in projectlist %}    
+            <a href="/project/timelist/{{project.id}}">
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>{{project.projectName}}</h3>
+                        <p>{{project.projectStartDate}}</p>
+                        <p>{{project.projectCostPerHr}}</p>
+                        <p>
+                            <form method="post" action=".">
+                            <input type="hidden" name="projectid" value="{{project.id}}" />
+                            <input type="hidden" name="clientid" value="{{client_id}}" />
+                            <input type="submit" class="btn btn-primary" name="action" value="delete"/>
 
-	{% csrf_token %}
-	</form>
-    </p>
-    {% endfor %}
-    {% endif %}
+                            {% csrf_token %}
+                            </form>
+                            <!-- <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a> -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </a>
+        {% endfor %}
+        {% endif %}
+    </div>
+    </div>            
 {% endblock %}

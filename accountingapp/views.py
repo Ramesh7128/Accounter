@@ -70,7 +70,7 @@ class AddClient(View):
 			client = Client()
 			client.clientName = form.cleaned_data['clientName']
 			client.clientEmail = form.cleaned_data['clientEmail']
-			client.clientCompany = form.cleaned_data['clientCompany']
+			client.clientCompanyInfo = form.cleaned_data['clientCompany']
 			client.user = request.user
 			client.save()
 			return HttpResponseRedirect('/clients')
@@ -104,26 +104,23 @@ class AddProject(View):
 
 	def get(self, request, **kwargs):
 
-		form = AddProjectForm(initial={'projectClient': self.kwargs['pk']})
-		form.fields['projectClient'].widget = forms.HiddenInput()
 		context = {}
-		context['form'] = form
+		context['projectClient'] = self.kwargs['pk']
 		return render(request, 'accountingapp/addproject.html', context)
 
 
 	def post(self, request, **kwargs):
-		form  = AddProjectForm(request.POST)
-		if form.is_valid():
-			project = Project()
-			project.projectName = form.cleaned_data['projectName']
-			project.projectStartDate = form.cleaned_data['projectStartDate']
-			project.projectCostPerHr =  form.cleaned_data['projectCostPerHr']
-			clientId = form.cleaned_data['projectClient']
-			client = Client.objects.get(id=clientId)
-			project.projectClient = client
-			project.user = request.user
-			project.save()
-			return HttpResponseRedirect('/clients/'+str(clientId)+'/projects/')
+		# write checking conditions
+		project = Project()
+		project.projectName = request.POST.get('projectName')
+		project.projectStartDate = request.POST.get('projectStartDate')
+		project.projectCostPerHr =  request.POST.get('projectCostPerHr')
+		clientId = request.POST.get('projectClient')
+		client = Client.objects.get(id=clientId)
+		project.projectClient = client
+		project.user = request.user
+		project.save()
+		return HttpResponseRedirect('/clients/'+str(clientId)+'/projects/')
 
 
 
@@ -156,26 +153,34 @@ class ProjectTimeList(View):
 class AddProjectTime(View):
 
 	def get(self, request, **kwargs):
-
-		form = AddProjectTimeForm(initial={'projectId': self.kwargs['pk']})
-		form.fields['projectId'].widget = forms.HiddenInput()
 		context = {}
-		context['form'] = form
+		context['projectId'] = self.kwargs['pk']
 		return render(request, 'accountingapp/add_project_time.html', context)
 
 
 	def post(self, request, **kwargs):
-		form  = AddProjectTimeForm(request.POST)
-		if form.is_valid():
-			projectTime = ProjectTimeEntry()
-			projectTime.workDescription = form.cleaned_data['workDescription']
-			projectTime.hoursOfWork = form.cleaned_data['hoursOfWork']
-			projectTime.dateOfWork =  form.cleaned_data['dateOfWork']
-			projectId = form.cleaned_data['projectId']
-			project = Project.objects.get(id=projectId)
-			projectTime.project = project
-			projectTime.save()
-			return HttpResponseRedirect('/project/timelist/'+ str(projectId) + '/')
+		projectTime = ProjectTimeEntry()
+		projectTime.workDescription = request.POST.get('workDescription')
+		projectTime.hoursOfWork = request.POST.get('hoursOfWork')
+		projectId = request.POST.get('projectId')
+		project = Project.objects.get(id=projectId)
+		projectTime.project = project
+		projectTime.save()
+		return HttpResponseRedirect('/project/timelist/'+ str(projectId) + '/')
+
+
+class Reports(View):
+
+	def get(self, request, *args, **kwargs):
+
+		user = request.user
+		clients = Client.objects.filter(user=user)
+		projects = Project.objects.filter(user=user)
+		context = {}
+		context['clients'] = clients
+		context['projects'] = projects
+		return render(request, 'accountingapp/summary_reports.html', context)
+
 
 
 
