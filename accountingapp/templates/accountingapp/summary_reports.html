@@ -26,8 +26,8 @@
             {% for proj in projects %}
             <tr>
                 <td>{{proj.projectName}}</td>
-                <td>{{proj.id|project_total_hours}}</td>
-                <td>{{proj.id|project_total_cost}}</td>
+                <td>{{proj.id|project_total_hours|floatformat:2}}</td>
+                <td>{{proj.id|project_total_cost|floatformat:2}}</td>
                 
             </tr>
             {% endfor %}
@@ -56,8 +56,8 @@
             {% for client in clients %}
             <tr>
                 <td>{{client.clientName}}</td>
-                <td>{{client.id|client_total_hours}}</td>
-                <td>{{client.id|client_total_cost}}</td>
+                <td>{{client.id|client_total_hours|floatformat:2}}</td>
+                <td>{{client.id|client_total_cost|floatformat:2}}</td>
                 
             </tr>
             {% endfor %}
@@ -89,9 +89,9 @@
             {% for proj in projects %}
             <tr>
                 <td>{{proj.projectName}}</td>
-                <td>{{proj.id|project_workinghrs_week}}</td>
-                <td>{{proj.id|project_workinghrs_month}}</td>
-                <td>{{proj.id|project_workinghrs_year}}</td>                
+                <td>{{proj.id|project_workinghrs_week|floatformat:2}}</td>
+                <td>{{proj.id|project_workinghrs_month|floatformat:2}}</td>
+                <td>{{proj.id|project_workinghrs_year|floatformat:2}}</td>                
             </tr>
             {% endfor %}
             {% endif %}
@@ -122,9 +122,9 @@
             {% for proj in projects %}
             <tr>
                 <td>{{proj.projectName}}</td>
-                <td>{{proj.id|project_earnings_week}}</td>
-                <td>{{proj.id|project_earnings_month}}</td>
-                <td>{{proj.id|project_earnings_year}}</td>                
+                <td>{{proj.id|project_earnings_week|floatformat:2}}</td>
+                <td>{{proj.id|project_earnings_month|floatformat:2}}</td>
+                <td>{{proj.id|project_earnings_year|floatformat:2}}</td>                
             </tr>
             {% endfor %}
             {% endif %}
