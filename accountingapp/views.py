@@ -10,6 +10,10 @@ from django.core.urlresolvers import reverse
 from django.views.generic import View
 from django.http import Http404
 from accountingapp.models import *
+from datetime import timedelta
+from datetime import date
+
+
  
 @csrf_protect
 def register_page(request):
@@ -167,6 +171,7 @@ class AddProjectTime(View):
 		projectTime.project = project
 		projectTime.save()
 		return HttpResponseRedirect('/project/timelist/'+ str(projectId) + '/')
+
 
 
 class Reports(View):

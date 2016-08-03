@@ -1,7 +1,8 @@
 from django.template import Library
 from django.contrib.auth.models import User
 from accountingapp.models import *
-
+from datetime import timedelta
+from datetime import date
 register = Library()
 
 
@@ -57,9 +58,114 @@ def client_total_cost(clientId):
 	except:
 		return 0
 
+@register.filter
+def project_workinghrs_week(projectId):
+	try:
+		project = Project.objects.get(id=projectId)
+		no_days_elapsed = date.today()-project.projectStartDate
+		days = no_days_elapsed.days
+		if (days < 0):
+			return "NA"
+		total_hours = float(project_total_hours(project.id))
+		hrs_per_week = (7.0/days) * (total_hours)
+		return hrs_per_week
+	except:
+		return "NA"
 
-# def client_total_cost_per_week(clientId):
-# 	try:
+
+@register.filter
+def project_workinghrs_month(projectId):
+
+	try:
+		project = Project.objects.get(id=projectId)
+		no_days_elapsed = date.today()-project.projectStartDate
+		days = no_days_elapsed.days
+		if (days < 0):
+			return "NA"
+		total_hours = float(project_total_hours(project.id))
+		hrs_per_month = (30.0/days) * (total_hours)
+		return hrs_per_month
+	except:
+		return "NA"
+
+@register.filter
+def project_workinghrs_year(projectId):
+
+	try:
+		project = Project.objects.get(id=projectId)
+		no_days_elapsed = date.today()-project.projectStartDate
+		days = no_days_elapsed.days
+		if (days < 0):
+			return "NA"
+		total_hours = float(project_total_hours(project.id))
+		hrs_per_year = (365.0/days) * (total_hours)
+		return hrs_per_year
+	except:
+		return "NA"
+
+
+@register.filter
+def project_earnings_week(projectId):
+
+	try:
+		project = Project.objects.get(id=projectId)
+		no_days_elapsed = date.today()-project.projectStartDate
+		days = no_days_elapsed.days
+		if (days < 0):
+			return "NA"
+		total_earnings = float(project_total_cost(project.id))
+		earnings_per_week = (7.0/days) * (total_earnings)
+		return earnings_per_week
+	except:
+		return "NA"
+
+@register.filter
+def project_earnings_month(projectId):
+
+	try:
+		project = Project.objects.get(id=projectId)
+		no_days_elapsed = date.today()-project.projectStartDate
+		days = no_days_elapsed.days
+		if (days < 0):
+			return "NA"
+		total_earnings = float(project_total_cost(project.id))
+		earnings_per_month = (30.0/days) * (total_earnings)
+		return earnings_per_month
+	except:
+		return "NA"
+
+
+@register.filter
+def project_earnings_year(projectId):
+
+	try:
+		project = Project.objects.get(id=projectId)
+		no_days_elapsed = date.today()-project.projectStartDate
+		days = no_days_elapsed.days
+		if (days < 0):
+			return "NA"
+		total_earnings = float(project_total_cost(project.id))
+		earnings_per_year = (365.0/days) * (total_earnings)
+		return earnings_per_year
+	except:
+		return "NA"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
