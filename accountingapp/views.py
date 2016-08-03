@@ -70,7 +70,7 @@ class AddClient(View):
 			client = Client()
 			client.clientName = form.cleaned_data['clientName']
 			client.clientEmail = form.cleaned_data['clientEmail']
-			client.clientCompanyInfo = form.cleaned_data['clientCompany']
+			client.clientCompanyInfo = form.cleaned_data['clientCompanyInfo']
 			client.user = request.user
 			client.save()
 			return HttpResponseRedirect('/clients')

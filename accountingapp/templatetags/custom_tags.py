@@ -33,17 +33,19 @@ def project_total_cost(projId):
 		print e
 		return 0
 
+@register.filter
 def client_total_hours(clientId):
 	try:
 		client = Client.objects.get(id=clientId)
 		clientsProjects = Project.objects.filter(projectClient=client)
 		total_client_time = 0
 		for project in clientsProjects:
-			total_client_time += float(projects_total_hours(project.id))
+			total_client_time += float(project_total_hours(project.id))
 		return total_client_time
 	except:
 		return 0
 
+@register.filter
 def client_total_cost(clientId):
 	try:
 		client = Client.objects.get(id=clientId)
@@ -54,6 +56,10 @@ def client_total_cost(clientId):
 		return total_client_cost
 	except:
 		return 0
+
+
+# def client_total_cost_per_week(clientId):
+# 	try:
 
 
 
