@@ -4,7 +4,9 @@
 {% block content %}
     
     <div class="container">
-    <p><a href="/addproject/{{client_id}}" class="btn btn-primary">Add Project</a></p>
+    <p><a href="/addproject/{{client_id}}" class="btn btn-primary">Add Project</a>
+    <a href="/reports" class="btn btn-primary">Summary Reports</a></p>
+    <br><br>
     <div class="row text-center">
         {% if projectlist %}
         {% for project in projectlist %}    
