@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accountingapp',
+    'gunicorn',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -128,7 +129,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
